@@ -12,6 +12,7 @@ class Employee < ApplicationRecord
   has_secure_password
 
   belongs_to :company
+  has_one :employee_profile, dependent: :destroy
 
   enum email_verification_status: { unspecified: 0, requested: 1, verified: 2 }
 
