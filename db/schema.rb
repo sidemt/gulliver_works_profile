@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_194823) do
+ActiveRecord::Schema.define(version: 2021_03_31_123938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2021_03_30_194823) do
     t.uuid "email_verification_token", comment: "メール確認用のトークン"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "account_profile_id"
+    t.index ["account_profile_id"], name: "index_accounts_on_account_profile_id"
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
@@ -55,8 +57,10 @@ ActiveRecord::Schema.define(version: 2021_03_30_194823) do
     t.uuid "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "employee_profile_id"
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["employee_profile_id"], name: "index_employees_on_employee_profile_id"
   end
 
   create_table "employment_statuses", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "雇用形態", force: :cascade do |t|
@@ -135,7 +139,9 @@ ActiveRecord::Schema.define(version: 2021_03_30_194823) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "accounts", "profiles", column: "account_profile_id"
   add_foreign_key "employees", "companies"
+  add_foreign_key "employees", "profiles", column: "employee_profile_id"
   add_foreign_key "industries", "industry_categories"
   add_foreign_key "occupation_sub_categories", "occupation_main_categories"
   add_foreign_key "occupations", "occupation_sub_categories"
