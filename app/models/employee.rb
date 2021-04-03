@@ -12,7 +12,7 @@ class Employee < ApplicationRecord
   has_secure_password
 
   belongs_to :company
-  belongs_to :employee_profile
+  belongs_to :employee_profile, optional: true
 
   enum email_verification_status: { unspecified: 0, requested: 1, verified: 2 }
 

@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   end
 
   namespace :v1 do
-    resources :accounts, only: %i[index show destroy]
+    resources :accounts, only: %i[index show destroy] do
+      get :profile, to: 'account_profile#show'
+      post :profile, to: 'account_profile#create'
+      patch :profile, to: 'account_profile#update'
+    end
     resources :occupation_main_categories, only: :index
     resources :industry_categories, only: :index
     resources :prefectures, only: :index

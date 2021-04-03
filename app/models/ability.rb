@@ -8,6 +8,7 @@ class Ability
 
     can :read, Account
     can :manage, Account, id: account.id
+    can :manage, AccountProfile, account: { id: account.id }
     can :read, OccupationMainCategory
     can :read, OccupationSubCategory
     can :read, Occupation
