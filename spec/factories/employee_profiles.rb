@@ -12,16 +12,7 @@ FactoryBot.define do
     biography { "自己PR/紹介" }
   end
 
-  factory :employee_profile_b, class: EmployeeProfile do
+  trait :first_name_hanako do
     first_name { "花子" }
-    last_name { "田中" }
-    first_name_kana { "ハナコ" }
-    last_name_kana { "タナカ" }
-    gender { "female" }
-    phone { "03-0000-0000" }
-    postal_code { "111-1111" }
-    address { "東京都千代田区千代田1-7-18" }
-    date_of_birth { "2000-01-01" }
-    biography { "自己PR/紹介2" }
   end
 end
