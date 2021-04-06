@@ -19,7 +19,7 @@ module V1
 
     def update
       @account_profile.update!(account_profile_params)
-      render json: @account_profile, status: :ok
+      render json: @account_profile
     end
 
     private

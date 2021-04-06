@@ -19,7 +19,7 @@ module Enterprise
 
       def update
         @employee_profile.update!(employee_profile_params)
-        render json: @employee_profile, status: :ok
+        render json: @employee_profile
       end
 
       private
