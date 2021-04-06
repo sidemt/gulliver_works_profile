@@ -1,6 +1,6 @@
 class Profile < ApplicationRecord
 
-  enum gender: { MALE: 0, FEMALE: 1, OTHER: 2 }
+  enum gender: { male: 0, female: 1, other: 2 }
 
   validates :first_name,
             :last_name,

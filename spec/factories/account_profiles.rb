@@ -4,7 +4,7 @@ FactoryBot.define do
     last_name { "山田" }
     first_name_kana { "タロウ" }
     last_name_kana { "ヤマダ" }
-    gender { "MALE" }
+    gender { "male" }
     phone { "090-1234-5678" }
     postal_code { "107-0051" }
     address { "東京都港区元赤坂1-7-18" }
@@ -17,7 +17,7 @@ FactoryBot.define do
     last_name { "田中" }
     first_name_kana { "ハナコ" }
     last_name_kana { "タナカ" }
-    gender { "FEMALE" }
+    gender { "female" }
     phone { "03-0000-0000" }
     postal_code { "111-1111" }
     address { "東京都千代田区千代田1-7-18" }
