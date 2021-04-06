@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe V1::AccountProfileController, type: :request do
+RSpec.describe V1::AccountProfilesController, type: :request do
   # Account without Profile
   let!(:account_a) { create(:account) }
   let(:headers_a) { { Authorization: "Bearer #{account_a.jwt}" } }

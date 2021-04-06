@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Enterprise::V1::EmployeeProfileController, type: :request do
+RSpec.describe Enterprise::V1::EmployeeProfilesController, type: :request do
   # Employee without Profile
   let!(:employee_a) { create(:employee) }
   let(:headers_a) { { Authorization: "Bearer #{employee_a.jwt}" } }

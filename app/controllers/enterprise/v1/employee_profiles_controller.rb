@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module Enterprise
   module V1
-    class EmployeeProfileController < EnterpriseController
+    class EmployeeProfilesController < EnterpriseController
       before_action :load_and_authorize_employee_profile, only: %i[show update]
 
       def show

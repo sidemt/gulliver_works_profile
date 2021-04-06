@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class AccountProfileController < ApplicationController
+  class AccountProfilesController < ApplicationController
     before_action :load_and_authorize_account_profile, only: %i[show update]
 
     def show
