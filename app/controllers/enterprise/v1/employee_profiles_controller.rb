@@ -2,27 +2,19 @@
 module Enterprise
   module V1
     class EmployeeProfilesController < EnterpriseController
+      load_and_authorize_resource :employee
+      load_and_authorize_resource singleton: true, through: :employee
 
       def show
-        @employee_profile = Employee.find(params[:employee_id]).employee_profile
-        authorize! :read, @employee_profile
-
         render json: @employee_profile
       end
 
       def create
-        employee = Employee.find(params[:employee_id])
-        @employee_profile = employee.build_employee_profile(employee_profile_params)
-        authorize! :create, @employee_profile
-
         @employee_profile.save!
         render json: @employee_profile, status: :created
       end
 
       def update
-        @employee_profile = Employee.find(params[:employee_id]).employee_profile
-        authorize! :update, @employee_profile
-
         @employee_profile.update!(employee_profile_params)
         render json: @employee_profile
       end

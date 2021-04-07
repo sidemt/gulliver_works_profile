@@ -2,27 +2,19 @@
 
 module V1
   class AccountProfilesController < ApplicationController
+    load_and_authorize_resource :account
+    load_and_authorize_resource singleton: true, through: :account
 
     def show
-      @account_profile = Account.find(params[:account_id]).account_profile
-      authorize! :read, @account_profile
-
       render json: @account_profile
     end
 
     def create
-      account = Account.find(params[:account_id])
-      @account_profile = account.build_account_profile(account_profile_params)
-      authorize! :create, @account_profile
-
       @account_profile.save!
       render json: @account_profile, status: :created
     end
 
     def update
-      @account_profile = Account.find(params[:account_id]).account_profile
-      authorize! :update, @account_profile
-
       @account_profile.update!(account_profile_params)
       render json: @account_profile
     end
