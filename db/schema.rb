@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_194823) do
     t.string "last_name", null: false, comment: "苗字"
     t.string "first_name_kana", null: false, comment: "名前(フリガナ)"
     t.string "last_name_kana", null: false, comment: "苗字(フリガナ)"
-    t.integer "gender", default: 2, null: false, comment: "性別"
+    t.integer "gender", default: 0, null: false, comment: "性別"
     t.string "phone", null: false, comment: "電話番号"
     t.string "postal_code", comment: "郵便番号"
     t.string "address", comment: "住所"

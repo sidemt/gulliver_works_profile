@@ -8,7 +8,7 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.string :last_name, null: false, comment: '苗字'
       t.string :first_name_kana, null: false, comment: '名前(フリガナ)'
       t.string :last_name_kana, null: false, comment: '苗字(フリガナ)'
-      t.integer :gender, null: false, default: 2, comment: '性別'
+      t.integer :gender, null: false, default: 0, comment: '性別'
       t.string :phone, null: false, comment: '電話番号'
       t.string :postal_code, comment: '郵便番号'
       t.string :address, comment: '住所'
