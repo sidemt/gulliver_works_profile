@@ -8,6 +8,7 @@ class EnterpriseAbility
 
     can :read, Employee
     can :manage, Employee, id: employee.id
+    can :read, EmployeeProfile
     can :manage, EmployeeProfile, employee: { id: employee.id }
     can :read, Company
     can :manage, Company, id: employee.company_id
