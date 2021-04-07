@@ -1,3 +1,3 @@
 class EmployeeProfile < Profile
-  has_one :employee, dependent: :destroy
+  belongs_to :employee, optional: true
 end

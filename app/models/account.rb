@@ -11,7 +11,7 @@ class Account < ApplicationRecord
 
   has_secure_password
 
-  belongs_to :account_profile, optional: true # optional でないとサインアップ時にエラーとなる
+  has_one :account_profile, dependent: :destroy
 
   enum email_verification_status: { unspecified: 0, requested: 1, verified: 2 }
 

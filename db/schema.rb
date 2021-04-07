@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_31_123938) do
+ActiveRecord::Schema.define(version: 2021_03_30_194823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -23,8 +23,6 @@ ActiveRecord::Schema.define(version: 2021_03_31_123938) do
     t.uuid "email_verification_token", comment: "メール確認用のトークン"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "account_profile_id"
-    t.index ["account_profile_id"], name: "index_accounts_on_account_profile_id"
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
@@ -57,10 +55,8 @@ ActiveRecord::Schema.define(version: 2021_03_31_123938) do
     t.uuid "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "employee_profile_id"
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
-    t.index ["employee_profile_id"], name: "index_employees_on_employee_profile_id"
   end
 
   create_table "employment_statuses", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "雇用形態", force: :cascade do |t|
@@ -125,24 +121,28 @@ ActiveRecord::Schema.define(version: 2021_03_31_123938) do
 
   create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "プロフィール", force: :cascade do |t|
     t.string "type", comment: "STIを使用するためのtype"
+    t.uuid "account_id"
+    t.uuid "employee_id"
     t.string "first_name", null: false, comment: "名前"
     t.string "last_name", null: false, comment: "苗字"
     t.string "first_name_kana", null: false, comment: "名前(フリガナ)"
     t.string "last_name_kana", null: false, comment: "苗字(フリガナ)"
-    t.integer "gender", null: false, comment: "性別"
+    t.integer "gender", default: 2, null: false, comment: "性別"
     t.string "phone", null: false, comment: "電話番号"
-    t.string "postal_code", null: false, comment: "郵便番号"
-    t.string "address", null: false, comment: "住所"
+    t.string "postal_code", comment: "郵便番号"
+    t.string "address", comment: "住所"
     t.date "date_of_birth", null: false, comment: "生年月日"
-    t.string "biography", null: false, comment: "自己紹介"
+    t.string "biography", comment: "自己紹介"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_profiles_on_account_id"
+    t.index ["employee_id"], name: "index_profiles_on_employee_id"
   end
 
-  add_foreign_key "accounts", "profiles", column: "account_profile_id"
   add_foreign_key "employees", "companies"
-  add_foreign_key "employees", "profiles", column: "employee_profile_id"
   add_foreign_key "industries", "industry_categories"
   add_foreign_key "occupation_sub_categories", "occupation_main_categories"
   add_foreign_key "occupations", "occupation_sub_categories"
+  add_foreign_key "profiles", "accounts"
+  add_foreign_key "profiles", "employees"
 end

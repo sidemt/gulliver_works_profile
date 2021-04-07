@@ -16,9 +16,7 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     resources :accounts, only: %i[index show destroy] do
-      get :profile, to: 'account_profiles#show'
-      post :profile, to: 'account_profiles#create'
-      patch :profile, to: 'account_profiles#update'
+      resource :account_profile, only: [:show, :create, :update], path: 'profile', as: 'profile'
     end
     resources :occupation_main_categories, only: :index
     resources :industry_categories, only: :index
@@ -29,9 +27,7 @@ Rails.application.routes.draw do
   namespace :enterprise do
     namespace :v1 do
       resources :employees, only: %i[show destroy] do
-        get :profile, to: 'employee_profiles#show'
-        post :profile, to: 'employee_profiles#create'
-        patch :profile, to: 'employee_profiles#update'
+        resource :employee_profile, only: [:show, :create, :update], path: 'profile', as: 'profile'
       end
       resources :companies
       resources :occupation_main_categories, only: :index

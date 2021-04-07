@@ -1,3 +1,3 @@
 class AccountProfile < Profile
-  has_one :account, dependent: :destroy
+  belongs_to :account, optional: true
 end
