@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_194823) do
+ActiveRecord::Schema.define(version: 2021_04_08_075126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -139,10 +139,32 @@ ActiveRecord::Schema.define(version: 2021_03_30_194823) do
     t.index ["employee_id"], name: "index_profiles_on_employee_id"
   end
 
+  create_table "work_histories", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "職歴", force: :cascade do |t|
+    t.uuid "account_id"
+    t.boolean "is_employed", default: true, null: false, comment: "在職中/離職中"
+    t.uuid "occupation_id"
+    t.uuid "industry_id"
+    t.string "position", null: false, comment: "役職"
+    t.integer "annual_income", null: false, comment: "年収"
+    t.integer "management_experience", null: false, comment: "経験年数"
+    t.string "job_summary", comment: "業務内容"
+    t.date "since_date", null: false, comment: "開始日"
+    t.date "until_date", comment: "終了日"
+    t.string "name", null: false, comment: "社名"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_work_histories_on_account_id"
+    t.index ["industry_id"], name: "index_work_histories_on_industry_id"
+    t.index ["occupation_id"], name: "index_work_histories_on_occupation_id"
+  end
+
   add_foreign_key "employees", "companies"
   add_foreign_key "industries", "industry_categories"
   add_foreign_key "occupation_sub_categories", "occupation_main_categories"
   add_foreign_key "occupations", "occupation_sub_categories"
   add_foreign_key "profiles", "accounts"
   add_foreign_key "profiles", "employees"
+  add_foreign_key "work_histories", "accounts"
+  add_foreign_key "work_histories", "industries"
+  add_foreign_key "work_histories", "occupations"
 end
