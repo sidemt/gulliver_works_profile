@@ -3,8 +3,7 @@ class WorkHistory < ApplicationRecord
   belongs_to :occupation
   belongs_to :industry
 
-  validates :is_employed,
-            :position,
+  validates :position,
             :annual_income,
             :management_experience,
             :since_date,
