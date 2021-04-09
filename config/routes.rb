@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  namespace :v1 do
+    get 'work_histories/index'
+    get 'work_histories/show'
+    get 'work_histories/create'
+    get 'work_histories/update'
+    get 'work_histories/destroy'
+  end
   namespace :auth do
     namespace :v1 do
       post :sign_in, to: 'auth#sign_in'
@@ -17,11 +24,13 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :accounts, only: %i[index show destroy] do
       resource :account_profile, only: [:show, :create, :update], path: 'profile', as: 'profile'
+      resources :work_histories, only: [:index, :create]
     end
     resources :occupation_main_categories, only: :index
     resources :industry_categories, only: :index
     resources :prefectures, only: :index
     resources :employment_statuses, only: :index
+    resources :work_histories, only: [:show, :update, :destroy]
   end
 
   namespace :enterprise do
