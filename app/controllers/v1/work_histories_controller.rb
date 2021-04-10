@@ -20,7 +20,7 @@ module V1
     end
 
     def update
-      @work_history.update!(work_history_params)
+      @work_history.update!(resource_params)
       render json: @work_history
     end
 
@@ -31,7 +31,7 @@ module V1
 
     private
 
-    def work_history_params
+    def resource_params
       params.require(:work_history).permit(:is_employed,
                                            :occupation_id,
                                            :industry_id,
