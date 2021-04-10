@@ -2,9 +2,8 @@
 
 module V1
   class WorkHistoriesController < ApplicationController
-    load_and_authorize_resource only: [:show, :update, :destroy]
     load_and_authorize_resource :account, only: [:index, :create]
-    load_and_authorize_resource :work_history, through: :account, only: [:index, :create]
+    load_and_authorize_resource :work_history, through: :account, shallow: true
 
     def index
       render json: @work_histories, include: [:occupation, :industry]
