@@ -1,12 +1,5 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  namespace :v1 do
-    get 'work_histories/index'
-    get 'work_histories/show'
-    get 'work_histories/create'
-    get 'work_histories/update'
-    get 'work_histories/destroy'
-  end
   namespace :auth do
     namespace :v1 do
       post :sign_in, to: 'auth#sign_in'
