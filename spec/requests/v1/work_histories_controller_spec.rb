@@ -126,7 +126,7 @@ RSpec.describe V1::WorkHistoriesController, type: :request do
   describe 'PATCH /work_histories/{id}' do
     subject(:request) { patch v1_work_history_path((work_histories.first.id)), headers: auth_header, params: params }
     let(:params) do
-      { work_history: attributes_for(:work_history, :is_employed_false) }
+      { work_history: attributes_for(:work_history, :is_employed_false, :has_until_date) }
     end
 
     context '自身の職歴の場合' do
