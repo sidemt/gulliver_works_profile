@@ -12,6 +12,7 @@ class Account < ApplicationRecord
   has_secure_password
 
   has_one :account_profile, dependent: :destroy
+  has_many :work_histories, dependent: :destroy
 
   enum email_verification_status: { unspecified: 0, requested: 1, verified: 2 }
 
