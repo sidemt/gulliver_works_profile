@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :accounts, only: %i[index show destroy] do
       resource :account_profile, only: [:show, :create, :update], path: 'profile', as: 'profile'
       resources :work_histories, shallow: true
+      resources :academic_histories, shallow: true
     end
     resources :occupation_main_categories, only: :index
     resources :industry_categories, only: :index
