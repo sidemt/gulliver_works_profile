@@ -6,7 +6,7 @@ module V1
     load_and_authorize_resource :academic_history, through: :account, shallow: true
 
     def index
-      render json: @academic_histories, include: [:occupation, :industry]
+      render json: @academic_histories
     end
 
     def show
