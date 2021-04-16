@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_08_075126) do
+ActiveRecord::Schema.define(version: 2021_04_14_033813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "academic_histories", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "学歴", force: :cascade do |t|
+    t.uuid "account_id"
+    t.string "name", null: false, comment: "学校名"
+    t.string "faculty", comment: "学部"
+    t.date "since_date", null: false, comment: "入学日"
+    t.date "until_date", null: false, comment: "卒業日"
+    t.integer "type", default: 0, null: false, comment: "学校種別"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_academic_histories_on_account_id"
+  end
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "アカウント", force: :cascade do |t|
     t.string "email", null: false, comment: "メールアドレス"
@@ -158,6 +170,7 @@ ActiveRecord::Schema.define(version: 2021_04_08_075126) do
     t.index ["occupation_id"], name: "index_work_histories_on_occupation_id"
   end
 
+  add_foreign_key "academic_histories", "accounts"
   add_foreign_key "employees", "companies"
   add_foreign_key "industries", "industry_categories"
   add_foreign_key "occupation_sub_categories", "occupation_main_categories"
