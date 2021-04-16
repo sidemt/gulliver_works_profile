@@ -1,6 +1,6 @@
 class CreateAcademicHistories < ActiveRecord::Migration[6.0]
   def change
-    create_table :academic_histories, id: :uuid do |t|
+    create_table :academic_histories, id: :uuid, comment: '学歴' do |t|
       t.references :account, foreign_key: true, type: :uuid
       t.string :name, null: false, comment: '学校名'
       t.string :faculty, comment: '学部'
